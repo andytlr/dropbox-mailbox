@@ -13,6 +13,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="menu" id="l9R-8y-Z4D">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <animations/>
+                            </imageView>
                             <view contentMode="scaleToFill" id="AOM-Yz-6g1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -49,6 +54,14 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <animations/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ueU-eh-ERS">
+                                        <rect key="frame" x="0.0" y="18" width="53" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
+                                        <connections>
+                                            <action selector="tapHamburger:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cmB-ZG-1RT"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,6 +72,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="contentView" destination="AOM-Yz-6g1" id="zth-aD-rsu"/>
                         <outlet property="getMeToZero" destination="FBG-5x-Mkm" id="mc2-5S-afT"/>
                         <outlet property="message" destination="jKr-yW-aRL" id="goF-1I-WmT"/>
                         <outlet property="otherMessages" destination="YDV-7T-Vd7" id="r2a-mD-PQr"/>
@@ -67,6 +81,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="EfQ-8t-BCz">
+                    <connections>
+                        <action selector="edgeSwipe:" destination="BYZ-38-t0r" id="XjX-F9-uVh"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="173" y="394"/>
         </scene>
@@ -74,6 +93,7 @@
     <resources>
         <image name="feed" width="320" height="1202"/>
         <image name="help_label" width="320" height="37"/>
+        <image name="menu" width="320" height="568"/>
         <image name="message" width="320" height="86"/>
         <image name="nav" width="320" height="65"/>
         <image name="search" width="320" height="42"/>

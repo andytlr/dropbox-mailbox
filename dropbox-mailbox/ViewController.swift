@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var contentView: UIView!
+    
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var getMeToZero: UIImageView!
@@ -19,6 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var message: UIImageView!
     
     @IBOutlet weak var otherMessages: UIImageView!
+    
+    var navOpen: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +31,27 @@ class ViewController: UIViewController {
         scrollView.contentSize.width = otherMessages.frame.width
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func tapHamburger(sender: AnyObject) {
+        let closed = CGPoint(x: 0.0, y: 0.0)
+        let screenWidth = view.frame.width
+        let openX = screenWidth - 52
+        let open = CGPoint(x: openX, y: 0.0)
+        
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+            if self.navOpen == false {
+                self.contentView.frame.origin = open
+                self.navOpen = true
+            } else {
+                self.contentView.frame.origin = closed
+                self.navOpen = false
+            }
+            }) { (Bool) -> Void in
+                // derp
+        }
     }
 
-
+    @IBAction func edgeSwipe(sender: UIScreenEdgePanGestureRecognizer) {
+        
+    }
 }
 
