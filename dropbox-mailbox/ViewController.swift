@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 //        contentView.frame.origin.x += 30
     }
     
-    @IBAction func tapHamburger(sender: AnyObject) {
+    func toggleNav() {
         let closed = CGPoint(x: 0.0, y: 0.0)
         let screenWidth = view.frame.width
         let openX = screenWidth - 52
@@ -58,6 +58,10 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tapHamburger(sender: AnyObject) {
+        toggleNav()
+    }
+    
     func onEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
 //        let translation = sender.translationInView(view)
         let location = sender.locationInView(view)
@@ -73,7 +77,9 @@ class ViewController: UIViewController {
         }
         
         if sender.state == .Ended {
-            
+            if contentView.frame.origin.x > 40 {
+                toggleNav()
+            }
         }
     }
 
