@@ -37,32 +37,37 @@ class ViewController: UIViewController {
 //        contentView.frame.origin.x += 30
     }
     
-    func toggleNav() {
-        let closed = CGPoint(x: 0.0, y: 0.0)
+    func openNav() {
         let screenWidth = view.frame.width
         let openX = screenWidth - 52
         let open = CGPoint(x: openX, y: 0.0)
         
-        func openNav() {
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
             self.contentView.frame.origin = open
             self.navOpen = true
             self.scrollView.scrollEnabled = false
+            }) { (Bool) -> Void in
+                // derp
         }
+    }
+    
+    func closeNav() {
+        let closed = CGPoint(x: 0.0, y: 0.0)
         
-        func closeNav() {
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
             self.contentView.frame.origin = closed
             self.navOpen = false
             self.scrollView.scrollEnabled = true
-        }
-        
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
-            if self.navOpen == false {
-                openNav()
-            } else {
-                closeNav()
-            }
             }) { (Bool) -> Void in
                 // derp
+        }
+    }
+    
+    func toggleNav() {
+        if self.navOpen == false {
+            openNav()
+        } else {
+            closeNav()
         }
     }
     
@@ -87,9 +92,9 @@ class ViewController: UIViewController {
         
         if sender.state == .Ended {
             if velocity > 0 {
-                toggleNav()
+                openNav()
             } else {
-                // close nav
+                closeNav()
             }
         }
     }
