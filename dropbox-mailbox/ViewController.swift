@@ -26,10 +26,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
+        edgeGesture.edges = UIRectEdge.Left
+        contentView.addGestureRecognizer(edgeGesture)
         
         scrollView.contentSize.width = otherMessages.frame.width
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
+        
+//        contentView.frame.origin.x += 30
     }
     
     @IBAction func tapHamburger(sender: AnyObject) {
@@ -52,9 +57,25 @@ class ViewController: UIViewController {
                 // derp
         }
     }
-
-    @IBAction func edgeSwipe(sender: UIScreenEdgePanGestureRecognizer) {
+    
+    func onEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
+//        let translation = sender.translationInView(view)
+        let location = sender.locationInView(view)
+        print("Location of pan: \(location.x)")
+        print("Content View origin: \(contentView.frame.origin.x)")
         
+        if sender.state == .Began {
+            
+        }
+        
+        if sender.state == .Changed {
+            contentView.frame.origin.x = location.x
+        }
+        
+        if sender.state == .Ended {
+            
+        }
     }
+
 }
 

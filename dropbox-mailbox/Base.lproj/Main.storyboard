@@ -81,11 +81,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="EfQ-8t-BCz">
-                    <connections>
-                        <action selector="edgeSwipe:" destination="BYZ-38-t0r" id="XjX-F9-uVh"/>
-                    </connections>
-                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="173" y="394"/>
         </scene>
