@@ -80,8 +80,6 @@ class ViewController: UIViewController {
         let location = sender.locationInView(view)
         let velocity = sender.velocityInView(view).x
         
-        print(velocity)
-        
         if sender.state == .Began {
             
         }
@@ -91,8 +89,12 @@ class ViewController: UIViewController {
         }
         
         if sender.state == .Ended {
-            if velocity > 0 {
-                openNav()
+            if location.x > 44 {
+                if velocity > 0 {
+                    openNav()
+                } else {
+                    closeNav()
+                }
             } else {
                 closeNav()
             }
