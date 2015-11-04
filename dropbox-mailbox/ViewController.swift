@@ -79,13 +79,15 @@ class ViewController: UIViewController {
 //        let translation = sender.translationInView(view)
         let location = sender.locationInView(view)
         let velocity = sender.velocityInView(view).x
+        // jumpAmount is the amount of pan before the gesture recogniser realises you're panning. Subtracting this makes it feel like it's perfectly under your finger.
+        let jumpAmount = CGFloat(10.0)
         
         if sender.state == .Began {
             
         }
         
         if sender.state == .Changed {
-            contentView.frame.origin.x = location.x
+            contentView.frame.origin.x = location.x - jumpAmount
         }
         
         if sender.state == .Ended {
