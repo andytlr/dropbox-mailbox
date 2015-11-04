@@ -31,6 +31,7 @@ class ViewController: UIViewController {
         scrollView.contentSize.width = otherMessages.frame.width
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
     }
+    
     @IBAction func tapHamburger(sender: AnyObject) {
         let closed = CGPoint(x: 0.0, y: 0.0)
         let screenWidth = view.frame.width
@@ -41,9 +42,11 @@ class ViewController: UIViewController {
             if self.navOpen == false {
                 self.contentView.frame.origin = open
                 self.navOpen = true
+                self.scrollView.scrollEnabled = false
             } else {
                 self.contentView.frame.origin = closed
                 self.navOpen = false
+                self.scrollView.scrollEnabled = true
             }
             }) { (Bool) -> Void in
                 // derp
