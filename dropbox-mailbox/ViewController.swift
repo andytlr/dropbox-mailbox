@@ -43,15 +43,23 @@ class ViewController: UIViewController {
         let openX = screenWidth - 52
         let open = CGPoint(x: openX, y: 0.0)
         
+        func openNav() {
+            self.contentView.frame.origin = open
+            self.navOpen = true
+            self.scrollView.scrollEnabled = false
+        }
+        
+        func closeNav() {
+            self.contentView.frame.origin = closed
+            self.navOpen = false
+            self.scrollView.scrollEnabled = true
+        }
+        
         UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
             if self.navOpen == false {
-                self.contentView.frame.origin = open
-                self.navOpen = true
-                self.scrollView.scrollEnabled = false
+                openNav()
             } else {
-                self.contentView.frame.origin = closed
-                self.navOpen = false
-                self.scrollView.scrollEnabled = true
+                closeNav()
             }
             }) { (Bool) -> Void in
                 // derp
@@ -65,8 +73,9 @@ class ViewController: UIViewController {
     func onEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
 //        let translation = sender.translationInView(view)
         let location = sender.locationInView(view)
-        print("Location of pan: \(location.x)")
-        print("Content View origin: \(contentView.frame.origin.x)")
+        let velocity = sender.velocityInView(view).x
+        
+        print(velocity)
         
         if sender.state == .Began {
             
@@ -77,8 +86,10 @@ class ViewController: UIViewController {
         }
         
         if sender.state == .Ended {
-            if contentView.frame.origin.x > 40 {
+            if velocity > 0 {
                 toggleNav()
+            } else {
+                // close nav
             }
         }
     }
