@@ -242,7 +242,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.navOpen = true
             self.scrollView.scrollEnabled = false
             }) { (Bool) -> Void in
-                // derp
         }
     }
     
@@ -254,7 +253,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.navOpen = false
             self.scrollView.scrollEnabled = true
             }) { (Bool) -> Void in
-                // derp
         }
     }
     
