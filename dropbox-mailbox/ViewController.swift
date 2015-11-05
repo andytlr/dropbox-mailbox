@@ -26,15 +26,15 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var otherMessages: UIImageView!
     
-    var navOpen: Bool = false
-    
-    let scrollTo: CGPoint = CGPoint(x: 0, y: 79)
-    
     let lightGreyColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1)
     let greenColor = UIColor(red: 98/255, green: 217/255, blue: 98/255, alpha: 1)
     let orangeColor = UIColor(red: 239/255, green: 84/255, blue: 12/255, alpha: 1)
     let yellowColor = UIColor(red: 255/255, green: 211/255, blue: 32/255, alpha: 1)
     let brownColor = UIColor(red: 215/255, green: 166/255, blue: 117/255, alpha: 1)
+    
+    var navOpen: Bool = false
+    let scrollTo: CGPoint = CGPoint(x: 0, y: 79)
+    var action: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,30 +65,37 @@ class ViewController: UIViewController {
             message.frame.origin.x = translation.x
             
             print(messageMoved)
+            print(action)
             
             switch messageMoved {
             case 60...220:
-                leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
                 leftIcon.image = UIImage(named: "archive_icon")
-                swipeyRowView.backgroundColor = greenColor
-            case 220...view.frame.width:
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
+                swipeyRowView.backgroundColor = greenColor
+                action = "archive"
+            case 220...view.frame.width:
                 leftIcon.image = UIImage(named: "delete_icon")
+                leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
                 swipeyRowView.backgroundColor = orangeColor
+                action = "delete"
             case 0...60:
                 leftIcon.image = UIImage(named: "archive_icon")
                 self.swipeyRowView.backgroundColor = self.lightGreyColor
+                action = ""
             case -60...0:
-                self.swipeyRowView.backgroundColor = self.lightGreyColor
                 rightIcon.image = UIImage(named: "later_icon")
+                self.swipeyRowView.backgroundColor = self.lightGreyColor
+                action = ""
             case -220...(-60):
+                rightIcon.image = UIImage(named: "later_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = yellowColor
-                rightIcon.image = UIImage(named: "later_icon")
+                action = "later"
             case (view.frame.width * -1)...(-220):
+                rightIcon.image = UIImage(named: "list_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = brownColor
-                rightIcon.image = UIImage(named: "list_icon")
+                action = "list"
             default:
                 return
             }
