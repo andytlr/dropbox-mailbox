@@ -65,7 +65,6 @@ class ViewController: UIViewController {
             message.frame.origin.x = translation.x
             
             print(messageMoved)
-            print(action)
             
             switch messageMoved {
             case 60...220:
@@ -103,19 +102,48 @@ class ViewController: UIViewController {
         
         if sender.state == .Ended {
             
-            if velocity < 0 {
-                
+            func reset() {
+                UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                    
+                    self.message.frame.origin.x = 0
+                    self.leftIcon.transform = CGAffineTransformMakeTranslation(0, 0)
+                    self.rightIcon.transform = CGAffineTransformMakeTranslation(0, 0)
+                    self.swipeyRowView.backgroundColor = self.lightGreyColor
+                    
+                    }) { (Bool) -> Void in
+                        // derp
+                }
             }
             
-            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
-                
-                self.message.frame.origin.x = 0
-                self.leftIcon.transform = CGAffineTransformMakeTranslation(0, 0)
-                self.rightIcon.transform = CGAffineTransformMakeTranslation(0, 0)
-                self.swipeyRowView.backgroundColor = self.lightGreyColor
-                
-                }) { (Bool) -> Void in
-                    // derp
+            switch action {
+            case "archive":
+                if velocity > 0 {
+                    print("ended on Archive")
+                } else {
+                    reset()
+                }
+            case "delete":
+                if velocity > 0 {
+                    print("ended on Delete")
+                } else {
+                    reset()
+                }
+            case "later":
+                if velocity < 0 {
+                    print("ended on Later")
+                } else {
+                    reset()
+                }
+            case "list":
+                if velocity < 0 {
+                    print("ended on List")
+                } else {
+                    reset()
+                }
+            case "":
+                reset()
+            default:
+                return
             }
         }
     }
