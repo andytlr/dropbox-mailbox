@@ -154,12 +154,36 @@ class ViewController: UIViewController {
             case "later":
                 if velocity < 0 {
                     print("ended on Later")
+                    
+                    leftIcon.alpha = 0
+                    
+                    UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                        
+                        self.message.frame.origin.x = self.view.frame.width * -1
+                        self.rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat((self.view.frame.width * -1) + 60), 0)
+                        self.rightIcon.alpha = 0
+                        
+                        }) { (Bool) -> Void in
+                    }
+                    
                 } else {
                     reset()
                 }
             case "list":
                 if velocity < 0 {
                     print("ended on List")
+                    
+                    leftIcon.alpha = 0
+                    
+                    UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                        
+                        self.message.frame.origin.x = self.view.frame.width * -1
+                        self.rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat((self.view.frame.width * -1) + 60), 0)
+                        self.rightIcon.alpha = 0
+                        
+                        }) { (Bool) -> Void in
+                    }
+                    
                 } else {
                     reset()
                 }
