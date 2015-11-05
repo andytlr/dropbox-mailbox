@@ -111,7 +111,6 @@ class ViewController: UIViewController {
                     self.swipeyRowView.backgroundColor = self.lightGreyColor
                     
                     }) { (Bool) -> Void in
-                        // derp
                 }
             }
             
@@ -119,12 +118,36 @@ class ViewController: UIViewController {
             case "archive":
                 if velocity > 0 {
                     print("ended on Archive")
+                    
+                    rightIcon.alpha = 0
+                    
+                    UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                        
+                        self.message.frame.origin.x = self.view.frame.width
+                        self.leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(self.view.frame.width - 60), 0)
+                        self.leftIcon.alpha = 0
+                        
+                        }) { (Bool) -> Void in
+                    }
+                    
                 } else {
                     reset()
                 }
             case "delete":
                 if velocity > 0 {
                     print("ended on Delete")
+                    
+                    rightIcon.alpha = 0
+                    
+                    UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                        
+                        self.message.frame.origin.x = self.view.frame.width
+                        self.leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(self.view.frame.width - 60), 0)
+                        self.leftIcon.alpha = 0
+                        
+                        }) { (Bool) -> Void in
+                    }
+                    
                 } else {
                     reset()
                 }
@@ -143,7 +166,7 @@ class ViewController: UIViewController {
             case "":
                 reset()
             default:
-                return
+                reset()
             }
         }
     }
