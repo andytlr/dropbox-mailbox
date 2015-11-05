@@ -79,29 +79,35 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
                 swipeyRowView.backgroundColor = greenColor
                 action = "archive"
+                self.scrollView.scrollEnabled = false
             case 220...view.frame.width:
                 leftIcon.image = UIImage(named: "delete_icon")
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
                 swipeyRowView.backgroundColor = orangeColor
                 action = "delete"
+                self.scrollView.scrollEnabled = false
             case 0...60:
                 leftIcon.image = UIImage(named: "archive_icon")
                 self.swipeyRowView.backgroundColor = self.lightGreyColor
                 action = ""
+                self.scrollView.scrollEnabled = true
             case -60...0:
                 rightIcon.image = UIImage(named: "later_icon")
                 self.swipeyRowView.backgroundColor = self.lightGreyColor
                 action = ""
+                self.scrollView.scrollEnabled = true
             case -220...(-60):
                 rightIcon.image = UIImage(named: "later_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = yellowColor
                 action = "later"
+                self.scrollView.scrollEnabled = false
             case (view.frame.width * -1)...(-220):
                 rightIcon.image = UIImage(named: "list_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = brownColor
                 action = "list"
+                self.scrollView.scrollEnabled = false
             default:
                 return
             }
