@@ -96,6 +96,7 @@
                         <outlet property="rightIcon" destination="19Z-H0-ZEG" id="ZRi-Dm-F2n"/>
                         <outlet property="scrollView" destination="HDV-H2-2GS" id="dEC-Bk-oid"/>
                         <outlet property="search" destination="eit-AD-Dsi" id="8Zc-UQ-XXC"/>
+                        <outlet property="swipeyRowView" destination="IPs-4O-Fhu" id="xFr-vH-YrQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

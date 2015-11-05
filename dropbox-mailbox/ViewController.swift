@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var search: UIImageView!
     
+    @IBOutlet weak var swipeyRowView: UIView!
+    
     @IBOutlet weak var message: UIImageView!
     
     @IBOutlet weak var leftIcon: UIImageView!
@@ -27,6 +29,12 @@ class ViewController: UIViewController {
     var navOpen: Bool = false
     
     let scrollTo: CGPoint = CGPoint(x: 0, y: 79)
+    
+    let lightGreyColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1)
+    let greenColor = UIColor(red: 98/255, green: 217/255, blue: 98/255, alpha: 1)
+    let orangeColor = UIColor(red: 239/255, green: 84/255, blue: 12/255, alpha: 1)
+    let yellowColor = UIColor(red: 255/255, green: 211/255, blue: 32/255, alpha: 1)
+    let brownColor = UIColor(red: 215/255, green: 166/255, blue: 117/255, alpha: 1)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +51,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func panMessage(sender: UIPanGestureRecognizer) {
-        let location = sender.locationInView(view)
+//        let location = sender.locationInView(view)
         let translation = sender.translationInView(view)
         let velocity = sender.velocityInView(view).x
         let messageMoved = message.frame.origin.x
@@ -55,14 +63,27 @@ class ViewController: UIViewController {
         
         if sender.state == .Changed {
             message.frame.origin.x = translation.x
-            print(message.frame.origin.x)
+            
+            print(messageMoved)
             
             if messageMoved > 60 {
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
+                swipeyRowView.backgroundColor = greenColor
+            }
+            
+
+            switch messageMoved {
+            case 0...60:
+                self.swipeyRowView.backgroundColor = self.lightGreyColor
+            case -60...0:
+                self.swipeyRowView.backgroundColor = self.lightGreyColor
+            default:
+                return
             }
             
             if messageMoved < -60 {
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
+                swipeyRowView.backgroundColor = yellowColor
             }
         }
         
