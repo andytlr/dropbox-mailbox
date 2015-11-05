@@ -18,6 +18,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var message: UIImageView!
     
+    @IBOutlet weak var leftIcon: UIImageView!
+    
+    @IBOutlet weak var rightIcon: UIImageView!
+    
     @IBOutlet weak var otherMessages: UIImageView!
     
     var navOpen: Bool = false
@@ -36,6 +40,48 @@ class ViewController: UIViewController {
         
 //        contentView.frame.origin.x += 30
         scrollView.setContentOffset(scrollTo, animated: true)
+    }
+    
+    @IBAction func panMessage(sender: UIPanGestureRecognizer) {
+        let location = sender.locationInView(view)
+        let translation = sender.translationInView(view)
+        let velocity = sender.velocityInView(view).x
+        let messageMoved = message.frame.origin.x
+        
+        if sender.state == .Began {
+
+            
+        }
+        
+        if sender.state == .Changed {
+            message.frame.origin.x = translation.x
+            print(message.frame.origin.x)
+            
+            if messageMoved > 60 {
+                leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
+            }
+            
+            if messageMoved < -60 {
+                rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
+            }
+        }
+        
+        if sender.state == .Ended {
+            
+            if velocity < 0 {
+                
+            }
+            
+            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                
+                self.message.frame.origin.x = 0
+                self.leftIcon.transform = CGAffineTransformMakeTranslation(0, 0)
+                self.rightIcon.transform = CGAffineTransformMakeTranslation(0, 0)
+                
+                }) { (Bool) -> Void in
+                    // derp
+            }
+        }
     }
     
     func openNav() {
