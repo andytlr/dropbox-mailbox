@@ -65,7 +65,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let messageMoved = message.frame.origin.x
         
         if sender.state == .Began {
-
             
         }
         
@@ -125,7 +124,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             switch action {
             case "archive":
                 if velocity > 0 {
-                    print("ended on Archive")
                     
                     rightIcon.alpha = 0
                     
@@ -150,7 +148,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             case "delete":
                 if velocity > 0 {
-                    print("ended on Delete")
                     
                     rightIcon.alpha = 0
                     
@@ -175,7 +172,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             case "later":
                 if velocity < 0 {
-                    print("ended on Later")
                     
                     leftIcon.alpha = 0
                     
@@ -200,7 +196,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 }
             case "list":
                 if velocity < 0 {
-                    print("ended on List")
                     
                     leftIcon.alpha = 0
                     
