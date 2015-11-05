@@ -131,12 +131,10 @@ class ViewController: UIViewController {
                             
                             UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
                                 
-//                                self.swipeyRowView.layer.anchorPoint = CGPointMake(0.5, 1)
-                                self.swipeyRowView.transform = CGAffineTransformMakeScale(1, 0.1)
+                                self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
                                 
                                 }) { (Bool) -> Void in
                             }
-                        
                     }
                     
                 } else {
@@ -155,6 +153,13 @@ class ViewController: UIViewController {
                         self.leftIcon.alpha = 0
                         
                         }) { (Bool) -> Void in
+                            
+                            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                                
+                                self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
+                                
+                                }) { (Bool) -> Void in
+                            }
                     }
                     
                 } else {
@@ -173,6 +178,13 @@ class ViewController: UIViewController {
                         self.rightIcon.alpha = 0
                         
                         }) { (Bool) -> Void in
+                            
+                            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                                
+                                self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
+                                
+                                }) { (Bool) -> Void in
+                            }
                     }
                     
                 } else {
@@ -191,6 +203,13 @@ class ViewController: UIViewController {
                         self.rightIcon.alpha = 0
                         
                         }) { (Bool) -> Void in
+                            
+                            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                                
+                                self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
+                                
+                                }) { (Bool) -> Void in
+                            }
                     }
                     
                 } else {

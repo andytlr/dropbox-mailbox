@@ -39,11 +39,6 @@
                                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="g5m-Me-r4f">
-                                                <rect key="frame" x="0.0" y="164" width="375" height="1978"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <animations/>
-                                            </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="helpmeandsearch" id="eit-AD-Dsi">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                                 <autoresizingMask key="autoresizingMask"/>
@@ -76,6 +71,11 @@
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="g5m-Me-r4f">
+                                                <rect key="frame" x="0.0" y="164" width="375" height="1978"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <animations/>
+                                            </imageView>
                                         </subviews>
                                         <animations/>
                                     </scrollView>
