@@ -14,8 +14,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var getMeToZero: UIImageView!
-    
     @IBOutlet weak var search: UIImageView!
     
     @IBOutlet weak var message: UIImageView!
@@ -23,6 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var otherMessages: UIImageView!
     
     var navOpen: Bool = false
+    
+    let scrollTo: CGPoint = CGPoint(x: 0, y: 79)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
         
 //        contentView.frame.origin.x += 30
+        scrollView.setContentOffset(scrollTo, animated: true)
     }
     
     func openNav() {
