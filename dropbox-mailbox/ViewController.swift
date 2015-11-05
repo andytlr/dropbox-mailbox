@@ -66,23 +66,31 @@ class ViewController: UIViewController {
             
             print(messageMoved)
             
-            if messageMoved > 60 {
+            switch messageMoved {
+            case 60...220:
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
+                leftIcon.image = UIImage(named: "archive_icon")
                 swipeyRowView.backgroundColor = greenColor
-            }
-            
-//            switch messageMoved {
-//            case 0...60:
-//                self.swipeyRowView.backgroundColor = self.lightGreyColor
-//            case -60...0:
-//                self.swipeyRowView.backgroundColor = self.lightGreyColor
-//            default:
-//                return
-//            }
-            
-            if messageMoved < -60 {
+            case 220...view.frame.width:
+                leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
+                leftIcon.image = UIImage(named: "delete_icon")
+                swipeyRowView.backgroundColor = orangeColor
+            case 0...60:
+                leftIcon.image = UIImage(named: "archive_icon")
+                self.swipeyRowView.backgroundColor = self.lightGreyColor
+            case -60...0:
+                self.swipeyRowView.backgroundColor = self.lightGreyColor
+                rightIcon.image = UIImage(named: "later_icon")
+            case -220...(-60):
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = yellowColor
+                rightIcon.image = UIImage(named: "later_icon")
+            case (view.frame.width * -1)...(-220):
+                rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
+                swipeyRowView.backgroundColor = brownColor
+                rightIcon.image = UIImage(named: "list_icon")
+            default:
+                return
             }
         }
         
