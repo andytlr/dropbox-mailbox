@@ -92,6 +92,7 @@
                         <outlet property="contentView" destination="AOM-Yz-6g1" id="zth-aD-rsu"/>
                         <outlet property="leftIcon" destination="uFD-Gh-I4q" id="Y1r-AF-JoG"/>
                         <outlet property="message" destination="dah-ox-gZJ" id="Rdw-5P-ONB"/>
+                        <outlet property="messagePanGestureRecognizer" destination="Wt1-U3-U9r" id="lte-wD-QDY"/>
                         <outlet property="otherMessages" destination="g5m-Me-r4f" id="UGr-pt-nVg"/>
                         <outlet property="rightIcon" destination="19Z-H0-ZEG" id="ZRi-Dm-F2n"/>
                         <outlet property="scrollView" destination="HDV-H2-2GS" id="dEC-Bk-oid"/>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var contentView: UIView!
     
@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var leftIcon: UIImageView!
     
     @IBOutlet weak var rightIcon: UIImageView!
+    
+    @IBOutlet var messagePanGestureRecognizer: UIPanGestureRecognizer!
     
     @IBOutlet weak var otherMessages: UIImageView!
     
@@ -43,11 +45,17 @@ class ViewController: UIViewController {
         edgeGesture.edges = UIRectEdge.Left
         contentView.addGestureRecognizer(edgeGesture)
         
+        messagePanGestureRecognizer.delegate = self
+        
         scrollView.contentSize.width = otherMessages.frame.width
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
         
 //        contentView.frame.origin.x += 30
         scrollView.setContentOffset(scrollTo, animated: true)
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     @IBAction func panMessage(sender: UIPanGestureRecognizer) {
