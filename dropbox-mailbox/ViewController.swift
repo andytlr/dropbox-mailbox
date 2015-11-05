@@ -71,15 +71,14 @@ class ViewController: UIViewController {
                 swipeyRowView.backgroundColor = greenColor
             }
             
-
-            switch messageMoved {
-            case 0...60:
-                self.swipeyRowView.backgroundColor = self.lightGreyColor
-            case -60...0:
-                self.swipeyRowView.backgroundColor = self.lightGreyColor
-            default:
-                return
-            }
+//            switch messageMoved {
+//            case 0...60:
+//                self.swipeyRowView.backgroundColor = self.lightGreyColor
+//            case -60...0:
+//                self.swipeyRowView.backgroundColor = self.lightGreyColor
+//            default:
+//                return
+//            }
             
             if messageMoved < -60 {
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
@@ -98,6 +97,7 @@ class ViewController: UIViewController {
                 self.message.frame.origin.x = 0
                 self.leftIcon.transform = CGAffineTransformMakeTranslation(0, 0)
                 self.rightIcon.transform = CGAffineTransformMakeTranslation(0, 0)
+                self.swipeyRowView.backgroundColor = self.lightGreyColor
                 
                 }) { (Bool) -> Void in
                     // derp
