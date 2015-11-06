@@ -14,6 +14,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var rescheduleView: UIView!
+    
     @IBOutlet weak var search: UIImageView!
     
     @IBOutlet weak var swipeyRowView: UIView!
@@ -49,11 +51,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         messagePanGestureRecognizer.delegate = self
         
+        rescheduleView.alpha = 0
+        
         scrollView.contentSize.width = otherMessages.frame.width
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
         
 //        contentView.frame.origin.x += 30
         scrollView.setContentOffset(scrollTo, animated: true)
+    }
+    
+    func resetMessage() {
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+            
+            self.message.frame.origin.x = 0
+            self.leftIcon.transform = CGAffineTransformMakeTranslation(0, 0)
+            self.rightIcon.transform = CGAffineTransformMakeTranslation(0, 0)
+            self.swipeyRowView.backgroundColor = self.lightGreyColor
+            self.leftIcon.alpha = 1
+            self.rightIcon.alpha = 1
+            
+            }) { (Bool) -> Void in
+        }
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -134,18 +152,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             
             self.scrollView.scrollEnabled = true
             
-            func reset() {
-                UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
-                    
-                    self.message.frame.origin.x = 0
-                    self.leftIcon.transform = CGAffineTransformMakeTranslation(0, 0)
-                    self.rightIcon.transform = CGAffineTransformMakeTranslation(0, 0)
-                    self.swipeyRowView.backgroundColor = self.lightGreyColor
-                    
-                    }) { (Bool) -> Void in
-                }
-            }
-            
             switch action {
             case "archive":
                 if velocity > 0 {
@@ -169,7 +175,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     }
                     
                 } else {
-                    reset()
+                    resetMessage()
                 }
             case "delete":
                 if velocity > 0 {
@@ -193,7 +199,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     }
                     
                 } else {
-                    reset()
+                    resetMessage()
                 }
             case "later":
                 if velocity < 0 {
@@ -208,16 +214,13 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                         
                         }) { (Bool) -> Void in
                             
-                            UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
-                                
-                                self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
-                                
-                                }) { (Bool) -> Void in
-                            }
+                            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                                self.rescheduleView.alpha = 1
+                            })
                     }
                     
                 } else {
-                    reset()
+                    resetMessage()
                 }
             case "list":
                 if velocity < 0 {
@@ -241,14 +244,41 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                     }
                     
                 } else {
-                    reset()
+                    resetMessage()
                 }
             case "":
-                reset()
+                resetMessage()
             default:
-                reset()
+                resetMessage()
             }
         }
+    }
+    
+    @IBAction func cancelRescheduling(sender: UITapGestureRecognizer) {
+        
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.rescheduleView.alpha = 0
+        }
+        
+        delay(0.15) {
+            self.resetMessage()
+        }
+
+    }
+    
+    @IBAction func tapRescheduleTime(sender: AnyObject) {
+        
+        UIView.animateWithDuration(0.3) { () -> Void in
+            self.rescheduleView.alpha = 0
+        }
+        
+        UIView.animateWithDuration(0.3, delay: 0.1, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+            
+            self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
+            
+            }) { (Bool) -> Void in
+        }
+        
     }
     
     func openNav() {
