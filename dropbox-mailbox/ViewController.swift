@@ -94,6 +94,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             message.frame.origin.x = translation.x
             
 //            print(messageMoved)
+            self.scrollView.scrollEnabled = false
             
             switch messageMoved {
             case 60...220:
@@ -130,6 +131,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         if sender.state == .Ended {
+            
+            self.scrollView.scrollEnabled = true
             
             func reset() {
                 UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
