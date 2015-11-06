@@ -166,10 +166,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 leftIcon.image = UIImage(named: "archive_icon")
                 self.swipeyRowView.backgroundColor = self.lightGreyColor
                 action = ""
+                leftIcon.alpha = convertValue(messageMoved, r1Min: 0, r1Max: 60, r2Min: 0, r2Max: 1)
             case -60...0:
                 rightIcon.image = UIImage(named: "later_icon")
                 self.swipeyRowView.backgroundColor = self.lightGreyColor
                 action = ""
+                rightIcon.alpha = convertValue(messageMoved, r1Min: 0, r1Max: -60, r2Min: 0, r2Max: 1)
             case -220...(-60):
                 rightIcon.image = UIImage(named: "later_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
