@@ -78,8 +78,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    override func motionBegan(motion: UIEventSubtype,
-        withEvent event: UIEvent?) {
+    override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent?) {
             
             if action != "" {
                 let alertController = UIAlertController(title: "Undo \(action)?", message: nil, preferredStyle: .Alert)
