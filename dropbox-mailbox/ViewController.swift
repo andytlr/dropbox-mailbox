@@ -64,6 +64,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func resetMessage() {
+        
         UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
             
             self.message.frame.origin.x = 0
@@ -87,6 +88,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 alertController.addAction(cancelAction)
                 
                 let UndoAction = UIAlertAction(title: "Yes", style: .Default) { (action) in
+                    
                     self.swipeyRowView.backgroundColor = self.lightGreyColor
                     self.swipeyRowView.transform = CGAffineTransformMakeTranslation(0, -(self.swipeyRowView.frame.height))
                     self.message.frame.origin.x = 0
@@ -97,17 +99,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                         self.otherMessages.transform = CGAffineTransformMakeTranslation(0, 0)
                         self.swipeyRowView.transform = CGAffineTransformMakeTranslation(0, 0)
                         
-                        
                         }) { (Bool) -> Void in
                             
                             self.resetMessage()
                     }
                 }
-                alertController.addAction(UndoAction)
                 
+                alertController.addAction(UndoAction)
                 self.presentViewController(alertController, animated: true) { }
             }
-            
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -115,6 +115,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
         let panGetsureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
         
         let velocity = panGetsureRecognizer.velocityInView(view)
@@ -127,6 +128,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOfGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
         if otherGestureRecognizer == leftEdgeGesture {
             return true
         } else {
@@ -135,6 +137,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func panMessage(sender: UIPanGestureRecognizer) {
+        
         let translation = sender.translationInView(view)
         let velocity = sender.velocityInView(view).x
         let messageMoved = message.frame.origin.x
@@ -187,6 +190,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.scrollView.scrollEnabled = true
             
             switch action {
+                
             case "Archive":
                 if velocity > 0 {
                     
@@ -211,6 +215,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     resetMessage()
                 }
+                
             case "Delete":
                 if velocity > 0 {
                     
@@ -235,6 +240,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     resetMessage()
                 }
+                
             case "Postpone":
                 if velocity < 0 {
                     
@@ -256,6 +262,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     resetMessage()
                 }
+                
             case "List":
                 if velocity < 0 {
                     
@@ -280,8 +287,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     resetMessage()
                 }
+                
             case "":
                 resetMessage()
+                
             default:
                 resetMessage()
             }
@@ -318,6 +327,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func openNav() {
+        
         let screenWidth = view.frame.width
         let openX = screenWidth - 52
         let open = CGPoint(x: openX, y: 0.0)
@@ -331,6 +341,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func closeNav() {
+        
         let closed = CGPoint(x: 0.0, y: 0.0)
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 5, options: [], animations: { () -> Void in
@@ -342,6 +353,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func toggleNav() {
+        
         if self.navOpen == false {
             openNav()
         } else {
@@ -354,6 +366,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func onLeftEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
+        
         let location = sender.locationInView(view)
         let velocity = sender.velocityInView(view).x
         let jumpAmount = CGFloat(10.0)
