@@ -61,7 +61,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func resetMessage() {
-        UIView.animateWithDuration(1.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
             
             self.message.frame.origin.x = 0
             self.leftIcon.transform = CGAffineTransformMakeTranslation(0, 0)
