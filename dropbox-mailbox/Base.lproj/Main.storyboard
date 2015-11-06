@@ -18,31 +18,6 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <animations/>
                             </imageView>
-                            <view contentMode="scaleToFill" id="jhp-0I-sVP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="reschedule" id="7EC-81-RLB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <animations/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="YWW-vb-PcT" appends="YES" id="aiZ-MQ-CeK"/>
-                                        </connections>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XGk-pB-qhO">
-                                        <rect key="frame" x="44" y="140" width="292" height="369"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <connections>
-                                            <action selector="tapRescheduleTime:" destination="BYZ-38-t0r" eventType="touchUpInside" id="77R-MC-Cev"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" id="AOM-Yz-6g1">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -104,12 +79,29 @@
                                         </subviews>
                                         <animations/>
                                     </scrollView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Xdt-kQ-beG">
-                                        <rect key="frame" x="0.0" y="0.0" width="55" height="667"/>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="jhp-0I-sVP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="reschedule" id="7EC-81-RLB">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <animations/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="YWW-vb-PcT" appends="YES" id="aiZ-MQ-CeK"/>
+                                        </connections>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XGk-pB-qhO">
+                                        <rect key="frame" x="44" y="140" width="292" height="369"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <animations/>
                                         <connections>
-                                            <action selector="tapHamburger:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SUr-qI-ZdZ"/>
+                                            <action selector="tapRescheduleTime:" destination="BYZ-38-t0r" eventType="touchUpInside" id="77R-MC-Cev"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -123,7 +115,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="contentView" destination="AOM-Yz-6g1" id="zth-aD-rsu"/>
-                        <outlet property="edgeOfContentWhenNavOpen" destination="Xdt-kQ-beG" id="7VW-AP-cgd"/>
                         <outlet property="leftIcon" destination="uFD-Gh-I4q" id="Y1r-AF-JoG"/>
                         <outlet property="message" destination="dah-ox-gZJ" id="Rdw-5P-ONB"/>
                         <outlet property="messagePanGestureRecognizer" destination="Wt1-U3-U9r" id="lte-wD-QDY"/>

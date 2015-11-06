@@ -14,8 +14,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var edgeOfContentWhenNavOpen: UIButton!
-    
     @IBOutlet weak var rescheduleView: UIView!
     
     @IBOutlet weak var search: UIImageView!
@@ -30,7 +28,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var messagePanGestureRecognizer: UIPanGestureRecognizer!
     
-    var edgeGesture: UIScreenEdgePanGestureRecognizer!
+    var leftEdgeGesture: UIScreenEdgePanGestureRecognizer!
+    var rightEdgeGesture: UIScreenEdgePanGestureRecognizer!
     
     @IBOutlet weak var otherMessages: UIImageView!
     
@@ -47,14 +46,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
-        edgeGesture.edges = UIRectEdge.Left
-        contentView.addGestureRecognizer(edgeGesture)
+        leftEdgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onLeftEdgePan:")
+        leftEdgeGesture.edges = UIRectEdge.Left
+        contentView.addGestureRecognizer(leftEdgeGesture)
+        
+        rightEdgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onRightEdgePan:")
+        rightEdgeGesture.edges = UIRectEdge.Right
+        contentView.addGestureRecognizer(rightEdgeGesture)
         
         messagePanGestureRecognizer.delegate = self
         
         rescheduleView.alpha = 0
-        edgeOfContentWhenNavOpen.alpha = 0
         
         scrollView.contentSize.width = otherMessages.frame.width
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
@@ -127,7 +129,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOfGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if otherGestureRecognizer == edgeGesture {
+        if otherGestureRecognizer == leftEdgeGesture {
             return true
         } else {
             return false
@@ -323,7 +325,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let screenWidth = view.frame.width
         let openX = screenWidth - 52
         let open = CGPoint(x: openX, y: 0.0)
-        edgeOfContentWhenNavOpen.alpha = 1
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 5, options: [], animations: { () -> Void in
             self.contentView.frame.origin = open
@@ -335,7 +336,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func closeNav() {
         let closed = CGPoint(x: 0.0, y: 0.0)
-        edgeOfContentWhenNavOpen.alpha = 0
         
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 5, options: [], animations: { () -> Void in
             self.contentView.frame.origin = closed
@@ -357,11 +357,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         toggleNav()
     }
     
-    func onEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
-//        let translation = sender.translationInView(view)
+    func onLeftEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
         let location = sender.locationInView(view)
         let velocity = sender.velocityInView(view).x
-        // jumpAmount is the amount of pan before the gesture recogniser realises you're panning. Subtracting this makes it feel like it's perfectly under your finger.
         let jumpAmount = CGFloat(10.0)
         
         if sender.state == .Began {
@@ -383,6 +381,10 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 closeNav()
             }
         }
+    }
+    
+    func onRightEdgePan(sender: UIScreenEdgePanGestureRecognizer) {
+        closeNav()
     }
 }
 
