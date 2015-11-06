@@ -61,7 +61,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func resetMessage() {
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+        UIView.animateWithDuration(1.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
             
             self.message.frame.origin.x = 0
             self.leftIcon.transform = CGAffineTransformMakeTranslation(0, 0)
@@ -69,9 +69,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.swipeyRowView.backgroundColor = self.lightGreyColor
             self.leftIcon.alpha = 1
             self.rightIcon.alpha = 1
+//            self.otherMessages.frame.origin.y += self.swipeyRowView.frame.height
             
             }) { (Bool) -> Void in
         }
+    }
+    
+    override func motionBegan(motion: UIEventSubtype,
+        withEvent event: UIEvent?) {
+            resetMessage()
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
