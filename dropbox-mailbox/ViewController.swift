@@ -69,7 +69,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.swipeyRowView.backgroundColor = self.lightGreyColor
             self.leftIcon.alpha = 1
             self.rightIcon.alpha = 1
-//            self.otherMessages.frame.origin.y += self.swipeyRowView.frame.height
+            self.otherMessages.transform = CGAffineTransformMakeTranslation(0, 0)
             
             }) { (Bool) -> Void in
         }
@@ -77,7 +77,19 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func motionBegan(motion: UIEventSubtype,
         withEvent event: UIEvent?) {
-            resetMessage()
+            
+            self.swipeyRowView.backgroundColor = self.lightGreyColor
+            self.message.frame.origin.x = 0
+            
+            UIView.animateWithDuration(0.75, delay: 0.75, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                
+                self.otherMessages.transform = CGAffineTransformMakeTranslation(0, 0)
+                
+                }) { (Bool) -> Void in
+                    
+                    self.resetMessage()
+            }
+            
     }
     
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -174,7 +186,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                             
                             UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
                                 
-                                self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
+                                self.otherMessages.transform = CGAffineTransformMakeTranslation(0, -(self.swipeyRowView.frame.height))
                                 
                                 }) { (Bool) -> Void in
                             }
@@ -198,7 +210,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                             
                             UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
                                 
-                                self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
+                                self.otherMessages.transform = CGAffineTransformMakeTranslation(0, -(self.swipeyRowView.frame.height))
                                 
                                 }) { (Bool) -> Void in
                             }
@@ -243,7 +255,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                             
                             UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
                                 
-                                self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
+                                self.otherMessages.transform = CGAffineTransformMakeTranslation(0, -(self.swipeyRowView.frame.height))
                                 
                                 }) { (Bool) -> Void in
                             }
@@ -280,7 +292,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         UIView.animateWithDuration(0.3, delay: 0.1, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
             
-            self.otherMessages.frame.origin.y -= self.swipeyRowView.frame.height
+            self.otherMessages.transform = CGAffineTransformMakeTranslation(0, -(self.swipeyRowView.frame.height))
             
             }) { (Bool) -> Void in
         }
