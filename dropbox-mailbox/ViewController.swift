@@ -79,11 +79,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         withEvent event: UIEvent?) {
             
             self.swipeyRowView.backgroundColor = self.lightGreyColor
+            self.swipeyRowView.transform = CGAffineTransformMakeTranslation(0, -(self.swipeyRowView.frame.height))
             self.message.frame.origin.x = 0
             
-            UIView.animateWithDuration(0.75, delay: 0.75, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+            UIView.animateWithDuration(1, delay: 1, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
                 
                 self.otherMessages.transform = CGAffineTransformMakeTranslation(0, 0)
+                self.swipeyRowView.transform = CGAffineTransformMakeTranslation(0, 0)
+                
                 
                 }) { (Bool) -> Void in
                     
