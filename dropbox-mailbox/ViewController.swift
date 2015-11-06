@@ -60,8 +60,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         scrollView.contentSize.width = otherMessages.frame.width
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
-        
-//        contentView.frame.origin.x += 30
         scrollView.setContentOffset(scrollTo, animated: true)
     }
     
@@ -137,7 +135,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func panMessage(sender: UIPanGestureRecognizer) {
-//        let location = sender.locationInView(view)
         let translation = sender.translationInView(view)
         let velocity = sender.velocityInView(view).x
         let messageMoved = message.frame.origin.x
@@ -149,7 +146,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if sender.state == .Changed {
             message.frame.origin.x = translation.x
             
-//            print(messageMoved)
             self.scrollView.scrollEnabled = false
             
             switch messageMoved {
