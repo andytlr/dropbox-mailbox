@@ -78,19 +78,31 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func motionBegan(motion: UIEventSubtype,
         withEvent event: UIEvent?) {
             
-            self.swipeyRowView.backgroundColor = self.lightGreyColor
-            self.swipeyRowView.transform = CGAffineTransformMakeTranslation(0, -(self.swipeyRowView.frame.height))
-            self.message.frame.origin.x = 0
-            
-            UIView.animateWithDuration(1, delay: 1, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+            if action != "" {
+                let alertController = UIAlertController(title: "Undo \(action)?", message: nil, preferredStyle: .Alert)
                 
-                self.otherMessages.transform = CGAffineTransformMakeTranslation(0, 0)
-                self.swipeyRowView.transform = CGAffineTransformMakeTranslation(0, 0)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in }
+                alertController.addAction(cancelAction)
                 
-                
-                }) { (Bool) -> Void in
+                let UndoAction = UIAlertAction(title: "Yes", style: .Default) { (action) in
+                    self.swipeyRowView.backgroundColor = self.lightGreyColor
+                    self.swipeyRowView.transform = CGAffineTransformMakeTranslation(0, -(self.swipeyRowView.frame.height))
+                    self.message.frame.origin.x = 0
                     
-                    self.resetMessage()
+                    UIView.animateWithDuration(1, delay: 0.2, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+                        
+                        self.otherMessages.transform = CGAffineTransformMakeTranslation(0, 0)
+                        self.swipeyRowView.transform = CGAffineTransformMakeTranslation(0, 0)
+                        
+                        
+                        }) { (Bool) -> Void in
+                            
+                            self.resetMessage()
+                    }
+                }
+                alertController.addAction(UndoAction)
+                
+                self.presentViewController(alertController, animated: true) { }
             }
             
     }
@@ -140,12 +152,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 leftIcon.image = UIImage(named: "archive_icon")
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
                 swipeyRowView.backgroundColor = greenColor
-                action = "archive"
+                action = "Archive"
             case 220...view.frame.width:
                 leftIcon.image = UIImage(named: "delete_icon")
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
                 swipeyRowView.backgroundColor = orangeColor
-                action = "delete"
+                action = "Delete"
             case 0...60:
                 leftIcon.image = UIImage(named: "archive_icon")
                 self.swipeyRowView.backgroundColor = self.lightGreyColor
@@ -158,12 +170,12 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 rightIcon.image = UIImage(named: "later_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = yellowColor
-                action = "later"
+                action = "Postpone"
             case (view.frame.width * -1)...(-220):
                 rightIcon.image = UIImage(named: "list_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = brownColor
-                action = "list"
+                action = "List"
             default:
                 return
             }
@@ -174,7 +186,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             self.scrollView.scrollEnabled = true
             
             switch action {
-            case "archive":
+            case "Archive":
                 if velocity > 0 {
                     
                     rightIcon.alpha = 0
@@ -198,7 +210,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     resetMessage()
                 }
-            case "delete":
+            case "Delete":
                 if velocity > 0 {
                     
                     rightIcon.alpha = 0
@@ -222,7 +234,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     resetMessage()
                 }
-            case "later":
+            case "Postpone":
                 if velocity < 0 {
                     
                     leftIcon.alpha = 0
@@ -243,7 +255,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     resetMessage()
                 }
-            case "list":
+            case "List":
                 if velocity < 0 {
                     
                     leftIcon.alpha = 0
@@ -276,6 +288,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func cancelRescheduling(sender: UITapGestureRecognizer) {
+        
+        action = ""
         
         UIView.animateWithDuration(0.3) { () -> Void in
             self.rescheduleView.alpha = 0
