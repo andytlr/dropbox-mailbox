@@ -14,6 +14,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
+    @IBOutlet weak var edgeOfContentWhenNavOpen: UIButton!
+    
     @IBOutlet weak var rescheduleView: UIView!
     
     @IBOutlet weak var search: UIImageView!
@@ -52,6 +54,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         messagePanGestureRecognizer.delegate = self
         
         rescheduleView.alpha = 0
+        edgeOfContentWhenNavOpen.alpha = 0
         
         scrollView.contentSize.width = otherMessages.frame.width
         scrollView.contentSize.height = otherMessages.frame.height + message.frame.height + search.frame.height + search.frame.height
@@ -320,8 +323,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let screenWidth = view.frame.width
         let openX = screenWidth - 52
         let open = CGPoint(x: openX, y: 0.0)
+        edgeOfContentWhenNavOpen.alpha = 1
         
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 5, options: [], animations: { () -> Void in
             self.contentView.frame.origin = open
             self.navOpen = true
             self.scrollView.scrollEnabled = false
@@ -331,8 +335,9 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func closeNav() {
         let closed = CGPoint(x: 0.0, y: 0.0)
+        edgeOfContentWhenNavOpen.alpha = 0
         
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 10, options: [], animations: { () -> Void in
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 5, options: [], animations: { () -> Void in
             self.contentView.frame.origin = closed
             self.navOpen = false
             self.scrollView.scrollEnabled = true
