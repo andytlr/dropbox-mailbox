@@ -26,6 +26,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var messagePanGestureRecognizer: UIPanGestureRecognizer!
     
+    var edgeGesture: UIScreenEdgePanGestureRecognizer!
+    
     @IBOutlet weak var otherMessages: UIImageView!
     
     let lightGreyColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1)
@@ -41,7 +43,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
+        edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
         edgeGesture.edges = UIRectEdge.Left
         contentView.addGestureRecognizer(edgeGesture)
         
@@ -58,6 +60,26 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         return true
     }
     
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let panGetsureRecognizer = gestureRecognizer as! UIPanGestureRecognizer
+        
+        let velocity = panGetsureRecognizer.velocityInView(view)
+        
+        if abs(velocity.x) > abs(velocity.y) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOfGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if otherGestureRecognizer == edgeGesture {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     @IBAction func panMessage(sender: UIPanGestureRecognizer) {
 //        let location = sender.locationInView(view)
         let translation = sender.translationInView(view)
@@ -71,7 +93,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         if sender.state == .Changed {
             message.frame.origin.x = translation.x
             
-            print(messageMoved)
+//            print(messageMoved)
             
             switch messageMoved {
             case 60...220:
@@ -79,35 +101,29 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
                 swipeyRowView.backgroundColor = greenColor
                 action = "archive"
-                self.scrollView.scrollEnabled = false
             case 220...view.frame.width:
                 leftIcon.image = UIImage(named: "delete_icon")
                 leftIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved - 60), 0)
                 swipeyRowView.backgroundColor = orangeColor
                 action = "delete"
-                self.scrollView.scrollEnabled = false
             case 0...60:
                 leftIcon.image = UIImage(named: "archive_icon")
                 self.swipeyRowView.backgroundColor = self.lightGreyColor
                 action = ""
-                self.scrollView.scrollEnabled = true
             case -60...0:
                 rightIcon.image = UIImage(named: "later_icon")
                 self.swipeyRowView.backgroundColor = self.lightGreyColor
                 action = ""
-                self.scrollView.scrollEnabled = true
             case -220...(-60):
                 rightIcon.image = UIImage(named: "later_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = yellowColor
                 action = "later"
-                self.scrollView.scrollEnabled = false
             case (view.frame.width * -1)...(-220):
                 rightIcon.image = UIImage(named: "list_icon")
                 rightIcon.transform = CGAffineTransformMakeTranslation(CGFloat(messageMoved + 60), 0)
                 swipeyRowView.backgroundColor = brownColor
                 action = "list"
-                self.scrollView.scrollEnabled = false
             default:
                 return
             }
